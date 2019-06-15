@@ -1,0 +1,74 @@
+#include<stdio.h>
+int main()
+{
+    freopen("12290.txt", "r", stdin);
+    long int n,m,k,i,j,clap,count,cl,v,r;
+    while(scanf("%ld %ld %ld",&n,&m,&k)==3)
+    {
+        if(n==0 && m==0 && k==0)
+            break;
+        count=cl=0;
+        for(i=1;i<=n;i++)
+        {
+            count++;
+            if(i==m)
+            {
+                if(count%7==0)
+                    cl++;
+                else
+                {
+                    v=count;
+                    while(v>0)
+                    {
+                        r=v%10;
+                        if(r==7)
+                        {
+                            cl++;
+                            break;
+                        }
+                        v=v/10;
+                    }
+                }
+            }
+            if(i==n)
+            {
+              for(j=n-1;j>1;j--)
+              {
+                 count++;
+                 if(j==m)
+                 {
+                    if(count%7==0)
+                        cl++;
+                     else
+                     {
+                        v=count;
+                        while(v>0)
+                        {
+                            r=v%10;
+                            if(r==7)
+                            {
+                                cl++;
+                                break;
+                            }
+                            v=v/10;
+                        }
+                      }
+                  }
+                  if(cl==k)
+                  {
+                      clap=count;
+                      break;
+                  }
+               }
+               i=0;
+            }
+            if(cl==k)
+            {
+                clap=count;
+                break;
+            }
+        }
+        printf("%ld\n",clap);
+    }
+    return 0;
+}
