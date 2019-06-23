@@ -1,0 +1,99 @@
+/************************************************************
+* Problem:   
+* Link:                                                     
+* Verdict:   
+* Date:                                                     
+* 
+* Coder:     Md. Shahidul Islam
+* Dept. :    Computer Science and Engineering
+* Institute: Begum Rokeya University, Rangpur, Bangladesh
+*
+*************************************************************/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define mem(a, b) memset(a, (b), sizeof(a))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define ABS(X) ( (X) > 0 ? (X) : ( -(X) ) )
+#define S(X) ( (X) * (X) )
+#define FORN(i, n) for(i = 0; i < n; i++)
+#define FORAB(i, a, b) for(i = a; i <= b; i++)
+#define IN(A, B, C)  ((B) <= (A) && (A) <= (C))
+#define in freopen("in.txt", "r", stdin)
+#define out freopen("out.txt", "w", stdout)
+#define clr(arr, key) memset(arr, key, sizeof arr)
+#define pb push_back
+#define mp(a, b) make_pair(a, b)
+#define inf (1 << 28)
+#define ll long long
+#define PI acos(-1)
+#define gcd(a, b) __gcd(a, b)
+#define fast ios_base::sync_with_stdio(0);cin.tie(0)
+#define lcm(a, b) ((a)*((b)/gcd(a,b)))
+#define no_of_ones __builtin_popcount // __builtin_popcountll for LL
+#define SZ(v) (int)(v.size())
+#define eps 1e-7
+#define ppb pop_back
+#define all(x) x.begin(),x.end()
+#define AIN(A, B, C) assert(IN(A, B, C))
+#define INF 1000000000
+int dr[]={0, 0, 1, -1, 1, 1, -1, -1};
+int dc[]={1, -1, 0, 0, 1, -1, 1, -1};
+
+typedef pair<int,int> pii;
+typedef pair<double, double> pdd;
+typedef vector<int> vi;
+typedef vector<pii> vpi;
+void preKMP(char *sub, int next[])
+{
+    int m=strlen(sub);
+    next[0] = 0;
+    for(int i=1, j=0;i<m;i++)
+    {
+        while(j>0 && sub[i]!=sub[j])
+            j = next[j-1];
+        if(sub[i]==sub[j])
+            j++;
+        next[i] = j;
+    }
+}
+int Matched(char *str, char *sub)
+{
+    int n=strlen(str);
+    int m=strlen(sub);
+    int next[m+1];
+    int cnt =0;
+    preKMP(sub, next);
+    for(int i=0, j=0;i<n;i++)
+    {
+        while(j>0 && str[i]!=sub[j])
+            j = next[j-1];
+        if(str[i]==sub[j])
+            j++;
+        if(j==m)
+        {
+            cnt++;
+            j = next[j-1];
+        }
+    }
+    return cnt;
+}
+
+int main()
+{
+    fast;
+    in;
+    //out;
+    int test, i, j, len, word, f;
+    char s1[1000002], s2[1000002];
+    scanf("%d", &test);
+    for(int cas = 1;cas<=test;cas++)
+    {
+        scanf("%s %s", s1, s2);
+        f = Matched(s1, s2);
+        printf("Case %d: %d\n", cas, f);
+    }
+    return 0;
+}
